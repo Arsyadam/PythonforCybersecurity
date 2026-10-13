@@ -2,3 +2,7 @@
 # A simple "Hello World" script in python
 # Created by Ed Goad, 2/3
 print("Hello World")
+print("Hello World")
+
+
+
