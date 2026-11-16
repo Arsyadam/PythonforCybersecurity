@@ -1,13 +1,26 @@
-# GetDadJoke.py - reference version for comparison
+#!/usr/bin/env python3
+# Script that gets a random dad joke from icanhazdadjoke.com
+# By Arsyad Mahardika
+# date: 11/15
+
+# Import Python modules
 import requests
+import json
 
-URL = "https://icanhazdadjoke.com/"
-HEADERS = {"Accept": "application/json"}
+def get_dad_joke():
+    # Setup the URL and the Accept header so the API returns JSON
+    request_uri = "https://icanhazdadjoke.com/"
+    headers = { 'Accept' : "application/json" }
+    # Perform the request
+    r = requests.get(request_uri, headers=headers)
+    # Convert the JSON to Python objects
+    items = r.json()
+    return items
 
-response = requests.get(URL, headers=HEADERS, timeout=10)
+joke = get_dad_joke()
 
-if response.status_code == 200:
-    data = response.json()
-    print(data["joke"])
-else:
-    print("Error: could not get a joke. Status code:", response.status_code)
+# print "pretty" json
+print( json.dumps(joke, indent=2) )
+
+# print only the joke
+print("Here's your dad joke: {0}".format(joke["joke"]))
